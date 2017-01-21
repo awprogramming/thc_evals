@@ -1,6 +1,7 @@
 <?php
   session_start();
   require_once('dbconfig.php');
+  require_once('permissions.php');
 
   if (isset($_GET['controller']) && isset($_GET['action'])) {
     $controller = $_GET['controller'];

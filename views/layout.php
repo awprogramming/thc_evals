@@ -24,12 +24,7 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-              <?php if(isset($_SESSION['logged_in'])){?>
-              <li><a href='index.php'>Profile (<?php echo $_SESSION['username']; ?>)</a></li>
-              <li><a href='?controller=auth&action=logout'>Logout</a></li>
-              <?php } else { ?>
-              <li><a href='?controller=pages&action=login'>Login</a></li>
-              <?php } ?>
+              <?php require_once('views/nav.php'); ?>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
