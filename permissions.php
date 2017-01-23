@@ -4,7 +4,8 @@
 function hasPermission($controller,$action){
 	$permissions = array('admin' =>	array('pages' => ['home','login','login_error','profile','permission_error','error'],
 									  'auth' => ['login','logout'],
-                       				  'users' => ['index','create','remove','update_password']),
+                       				  'users' => ['index','create','remove','update_password'],
+                       				  'divisions' => ['index','add_evaluator','remove_evaluator']),
                      'evaluator' =>	array('pages' => ['home','login','login_error','profile','permission_error','error'],
 									  'auth' => ['login','logout'],
 									  'users' => ['update_password'])

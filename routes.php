@@ -37,6 +37,10 @@
         require_once('models/user.php');
         $controller = new UsersController();
       break;
+      case 'divisions':
+        require_once('models/division.php');
+        $controller = new DivisionsController();
+      break;
 
     }
     // call the action
@@ -47,7 +51,8 @@
   // we consider those "allowed" values
   $controllers = array('pages' => ['home','login','login_error','profile','permission_error','error'],
                        'auth' => ['login','logout'],
-                       'users' => ['index','create','remove','update_password']
+                       'users' => ['index','create','remove','update_password'],
+                       'divisions' => ['index','add_evaluator','remove_evaluator']
                       );
   // check that the requested controller and action are both allowed
   // if someone tries to access something else he will be redirected to the error action of the pages controller

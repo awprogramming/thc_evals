@@ -4,6 +4,7 @@
 			case 'admin':
 ?>
 			<li><a href='?controller=users&action=index'>Users</a></li>
+			<li><a href='?controller=divisions&action=index'>Divisions</a></li>
 <?php
 			break;
 			case 'evaluator':
