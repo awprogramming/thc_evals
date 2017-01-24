@@ -11,7 +11,10 @@
     }
 
     public function profile() {
-      require_once('views/pages/profile.php');
+      if($_SESSION['role']=='admin')
+        require_once('views/pages/profile.php');
+      else
+        return call('divisions','get_mine');
     }
 
     public function permission_error() {

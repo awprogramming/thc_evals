@@ -37,5 +37,10 @@
         }
     }
 
+    public function get_mine(){
+        $divisions = Division::get_mine();
+        require_once('views/divisions/mine.php');
+    }
+
   }
 ?>

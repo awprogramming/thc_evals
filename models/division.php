@@ -34,6 +34,16 @@
         $list[$next_row[2]][2][] = array($next_row[0],$next_row[1]);
         $next_row = $result->fetch_row();
       }
+
+      $query = "SELECT c.id, d.id from counselor as c INNER JOIN division as d on c.division_id = d.id";
+      $result = $connection->query($query);
+      $next_row = $result->fetch_row();
+      while($next_row)
+      {
+        $list[$next_row[1]][3][] = array($next_row[0]);
+        $next_row = $result->fetch_row();
+      }
+
       $divisions = [];
       $boys = [];
       $girls = [];
@@ -82,6 +92,29 @@
         $next_row = $result->fetch_row();
       }
       return $list;
+    }
+
+    public static function get_mine(){
+      $connection = Db::getInstance();
+      $logged_in = $_SESSION['logged_in'];
+      $query = "SELECT c.*,d.name
+                FROM counselor AS c
+                INNER JOIN evaluator AS e ON c.division_id = e.division_id
+                INNER JOIN user AS u ON u.id = e.user_id
+                INNER JOIN division AS d on d.id = c.division_id
+                WHERE u.id ='$logged_in'";
+      
+      $result = $connection->query($query);
+      $list = [];
+      $next_row = $result->fetch_row();
+      while($next_row)
+      {
+        $list[$next_row[6]][] = new Counselor($next_row[0],$next_row[1],$next_row[2],$next_row[3],$next_row[4],$next_row[5]);
+        $next_row = $result->fetch_row();
+      }
+      
+      return $list;
+
     }
 
 

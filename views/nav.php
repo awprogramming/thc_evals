@@ -5,13 +5,14 @@
 ?>
 			<li><a href='?controller=users&action=index'>Users</a></li>
 			<li><a href='?controller=divisions&action=index'>Divisions</a></li>
+			<li><a href='?controller=counselors&action=index'>Counselors</a></li>
 <?php
 			break;
 			case 'evaluator':
 			break;
 		}
 ?>
-		<li><a href='index.php'>Profile (<?php echo $_SESSION['username']; ?>)</a></li>
+		<li><a href='?controller=pages&action=profile'>Profile (<?php echo $_SESSION['username']; ?>)</a></li>
 		<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
           <ul class="dropdown-menu">
