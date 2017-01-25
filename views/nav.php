@@ -6,6 +6,7 @@
 			<li><a href='?controller=users&action=index'>Users</a></li>
 			<li><a href='?controller=divisions&action=index'>Divisions</a></li>
 			<li><a href='?controller=counselors&action=index'>Counselors</a></li>
+			<li><a href='?controller=evaluations&action=questions'>Evaluations</a></li>
 <?php
 			break;
 			case 'evaluator':

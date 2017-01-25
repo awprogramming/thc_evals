@@ -6,6 +6,7 @@
     public $gender;
     public $division;
     public $type;
+    public $evals;
 
     public function __construct($id, $first, $last, $gender, $division, $type) {
       $this->id = $id;
@@ -14,6 +15,8 @@
       $this->gender = $gender;
       $this->division = $division;
       $this->type = $type;
+      require_once('models/evaluation.php');
+      $this->evals = Evaluation::counselor_evals($id);
     }
 
     public static function all() {

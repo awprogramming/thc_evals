@@ -8,6 +8,9 @@
 		<th>First</th>
 		<th>Last</th>
         <th>Type</th>
+        <td>Eval 1</td>
+        <td>Eval 2</td>
+        <td>Eval 3</td>
 	</tr>
 <?php 
 	   foreach($counselors as $counselor) { 
@@ -17,11 +20,35 @@
     <td><?php echo $counselor->first; ?></td>
     <td><?php echo $counselor->last; ?></td>
     <td><?php echo $counselor->type; ?></td>
-  </tr>
+<?php
+    $num_evals = count($counselor->evals);
+    foreach($counselor->evals as $eval){
+?>
+    <td>
+        <form action="?controller=evaluations&action=evaluate" method="post">
+            <input name="evaluation_id" value=<?php echo $eval->id ?> hidden>
+            <input type="submit" value="Continue">
+        </form>
+    </td>
 <?php 
-        }
+    }
+    for($i = 3-$num_evals; $i > 0; $i--){
+?>
+    <td>
+        <form action="?controller=evaluations&action=create" method="post">
+            <input name="counselor_id" value="<?php echo $counselor->id; ?>" hidden>
+            <input name="num" value="<?php echo 4-$i ?>" hidden>
+            <input type="submit" value="Start">
+        </form>
+    </td>
+<?php
+    }
+?>
+</tr>
+<?php
+  }
 ?>
 </table>
 <?php
-    }
+}
 ?>
