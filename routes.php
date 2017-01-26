@@ -65,7 +65,7 @@
                        'users' => ['index','create','remove','update_password'],
                        'divisions' => ['index','add_evaluator','remove_evaluator','get_mine'],
                        'counselors' => ['index','create','remove','update','add_division','change_division'],
-                       'evaluations' => ['index','questions','create_question','remove_question','update_question','create','evaluate']
+                       'evaluations' => ['index','questions','create_question','remove_question','update_question','create','evaluate','save_response','options','update_options','level']
                       );
   // check that the requested controller and action are both allowed
   // if someone tries to access something else he will be redirected to the error action of the pages controller

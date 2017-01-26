@@ -4,3 +4,17 @@ main{
 	margin-left: auto;
 	display: block;
 }
+
+.eval_summary {
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    padding:20px;
+    background-color: white;
+}
+
+.spacer {
+	height: 50px;
+}

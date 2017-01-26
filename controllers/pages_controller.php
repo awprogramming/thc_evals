@@ -12,7 +12,7 @@
 
     public function profile() {
       if($_SESSION['role']=='admin')
-        require_once('views/pages/profile.php');
+        return call('evaluations','options');
       else
         return call('divisions','get_mine');
     }

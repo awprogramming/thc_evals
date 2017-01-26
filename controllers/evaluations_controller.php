@@ -1,6 +1,24 @@
 <?php
   class EvaluationsController {
 
+    public function options() {
+        $options = Evaluation::options();
+        require_once('views/evaluations/options.php');
+        return call('evaluations','questions');
+    }
+
+    public function update_options() {
+        $options = array('low' => $_POST['low'],
+                         'high' => $_POST['high'],
+                         'gold' => $_POST['gold'],
+                         'silver' => $_POST['silver'],
+                         'green' => $_POST['green'],
+                         'red' => $_POST['red']);
+        Evaluation::update_options($options);
+        require_once('views/evaluations/options.php');
+        return call('evaluations','questions');
+    }
+
     public function questions() {
         $questions = Question::all();
         require_once('views/evaluations/questions.php');
@@ -49,9 +67,22 @@
             return call('pages','error');
         else{
             $responses = Response::get_eval_responses($_POST['evaluation_id']);
-            var_dump($responses);
             require_once('views/evaluations/evaluate.php');
         }
+    }
+
+    public function save_response(){
+        if(!isset($_POST['evaluation_id'])||!isset($_POST['question'])||!isset($_POST['score'])||!isset($_POST['feedback']))
+            return call('pages','error');
+        else
+            Evaluation::save_response($_POST['evaluation_id'],$_POST['question'],$_POST['score'],$_POST['feedback']);
+    }
+
+    public function level(){
+        if(!isset($_POST['score']))
+            return call('pages','error');
+        else
+            echo Evaluation::level($_POST['score']);
     }
 
   }

@@ -3,13 +3,13 @@
 
     public $evaluation_id;
     public $question;
-    public $grade;
+    public $score;
     public $feedback;
 
-    public function __construct($evaluation_id, $question, $grade, $feedback) {
+    public function __construct($evaluation_id, $question, $score, $feedback) {
       $this->evaluation_id = $evaluation_id;
       $this->question = $question;
-      $this->grade = $grade;
+      $this->score = $score;
       $this->feedback = $feedback;
     }
 
