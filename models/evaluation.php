@@ -6,6 +6,8 @@
     public $summer;
     public $submitted;
     public $approved;
+    public $score;
+    public $level;
 
     public function __construct($id, $num, $summer, $submitted, $approved) {
       $this->id = $id;
@@ -13,6 +15,9 @@
       $this->summer = $summer;
       $this->submitted = $submitted;
       $this->approved = $approved;
+      $score = Evaluation::score($id);
+      $this->score = $score;
+      $this->level = Evaluation::level($score);
     }
 
     public static function create($counselor_id, $num) {
@@ -23,7 +28,7 @@
       $query = "INSERT INTO `counselor_evaluation` (`counselor_id`,`evaluation_id`) VALUES ('$counselor_id','$evaluation_id')";
       $connection->query($query);
       
-      return Response::create_eval_responses($evaluation_id);
+      return $evaluation_id;
     }
 
     public static function counselor_evals($id) {
@@ -47,6 +52,14 @@
       $connection = Db::getInstance();
       $query = "UPDATE `response` SET `score`= '$score', `feedback`= '$feedback' WHERE evaluation_id='$evaluation_id' AND question='$question'";
       $connection->query($query);
+    }
+
+    public static function score($evaluation_id){
+       $connection = Db::getInstance();
+       $query = "SELECT SUM(score) FROM response where evaluation_id='$evaluation_id'";
+       $result = $connection->query($query);
+       $first_row = $result->fetch_row();
+       return $first_row[0];
     }
 
     public static function level($score){

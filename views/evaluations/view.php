@@ -34,3 +34,27 @@
         <input type="submit" value="Approve Evaluation">
     </form>
 </div>
+<script>
+var calculate_score = function(){
+        var total = 0;
+        $('.score_slider').each(function(){total+=parseInt($(this).val())});
+        return total;
+    }
+
+    var calculate_level = function(score){
+        $.ajax('ajax_preroute.php',
+        {
+            type: 'POST',
+            data: {controller:'evaluations',
+                   action:'level',
+                   score:score},
+            cache: true,
+            success: function (data) {$('#cur_level').html(data);}, 
+            error: function () {alert("Grab Failure");}
+        });
+    }
+
+    var cur_score = calculate_score();
+    $('#cur_score').html(cur_score);
+    calculate_level(cur_score);
+</script>

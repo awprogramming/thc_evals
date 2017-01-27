@@ -35,6 +35,7 @@
             <input name="evaluation_id" value=<?php echo $eval->id ?> hidden>
             <input type="submit" value="View">
         </form>
+        <span><?php echo $eval->level . ": " . $eval->score ?></span>
     </td>
 <?php 
     }

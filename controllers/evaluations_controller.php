@@ -57,7 +57,8 @@
         if(!isset($_POST['counselor_id'])||!isset($_POST['num']))
             return call('pages','error');
         else{
-            $responses = Evaluation::create($_POST['counselor_id'],$_POST['num']);
+            $evaluation_id = Evaluation::create($_POST['counselor_id'],$_POST['num']);
+            $responses = Response::create_eval_responses($evaluation_id);
             require_once('views/evaluations/evaluate.php');
         }
     }
@@ -82,8 +83,11 @@
     public function level(){
         if(!isset($_POST['score']))
             return call('pages','error');
-        else
-            echo Evaluation::level($_POST['score']);
+        else{
+            $level = Evaluation::level($_POST['score']);
+            echo $level;
+            return $level;
+        }
     }
 
     public function view(){

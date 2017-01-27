@@ -29,10 +29,10 @@
 
       while($next_row)
       {
-        $list[] = self::create($evaluation_id,$next_row[1]);
+        self::create($evaluation_id,$next_row[1]);
         $next_row = $result->fetch_row();
       } 
-      return $list;
+      return Response::get_eval_responses($evaluation_id);
     }
 
     public static function  get_eval_responses($evaluation_id) {
