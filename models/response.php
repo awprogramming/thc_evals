@@ -38,15 +38,26 @@
     public static function  get_eval_responses($evaluation_id) {
       
       $connection = Db::getInstance();
-      $query = "SELECT * FROM `response` where evaluation_id='$evaluation_id'";
+      $query = "SELECT r.*,c.first,c.last,e.num FROM response AS r 
+                INNER JOIN counselor_evaluation AS c_e 
+                ON r.evaluation_id = c_e.evaluation_id
+                INNER JOIN counselor as c
+                ON c_e.counselor_id = c.id
+                INNER JOIN evaluation as e
+                ON r.evaluation_id = e.id
+                where r.evaluation_id='$evaluation_id'";
       $result = $connection->query($query);
-      $list = [];
+      $responses = [];
       $next_row = $result->fetch_row();
+      $list['first'] = $next_row[4];
+      $list['last'] = $next_row[5];
+      $list['num'] =  $next_row[6];
       while($next_row)
       {
-        $list[] = new Response($next_row[0],$next_row[1],$next_row[2],$next_row[3]);
+        $responses[] = new Response($next_row[0],$next_row[1],$next_row[2],$next_row[3]);
         $next_row = $result->fetch_row();
       } 
+      $list['responses'] = $responses;
       return $list;
     }
   }

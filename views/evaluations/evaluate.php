@@ -1,4 +1,4 @@
-<h1>Counselor Evaluation</h1>
+<h1><?php echo $responses['first'] . ' ' . $responses['last']; ?>: Evaluation <?php echo $responses['num'] ?></h1>
 <table class="table">
     <tr>
         <th>Question</th>
@@ -6,7 +6,7 @@
     </tr>
 <?php 
     $count = 1;
-	foreach($responses as $response) { 
+	foreach($responses['responses'] as $response) { 
 ?>
   <tr>
     <td>
@@ -30,7 +30,10 @@
     <span class="saved">Saved</span>
     <span>Current Score: <span id="cur_score"></span></span>
     <span>Current Level: <span id="cur_level"></span></span>
-    <button>Submit Evaluation</button>
+    <form action="index.php?controller=evaluations&action=submit" method="post">
+        <input value="<?php echo $evaluation_id ?>" name="evaluation_id" hidden>
+        <input type="submit" value="Submit Evaluation">
+    </form>
 </div>
 <script>
     var calculate_score = function(){

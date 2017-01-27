@@ -79,5 +79,17 @@
       }
     }
 
+    public static function submit($evaluation_id) {
+      $connection = Db::getInstance();
+      $query = "UPDATE `evaluation` SET submitted = 1, approved = 0 WHERE id='$evaluation_id'";
+      $connection->query($query);
+    }
+
+    public static function approve($evaluation_id) {
+      $connection = Db::getInstance();
+      $query = "UPDATE `evaluation` SET approved = 1 WHERE id='$evaluation_id'";
+      $connection->query($query);
+    }
+
   }
 ?>

@@ -11,6 +11,11 @@
 			break;
 			case 'evaluator':
 			break;
+			case 'approver':
+?>
+			<li><a href='?controller=counselors&action=index'>Counselors</a></li>
+<?php
+			break;
 		}
 ?>
 		<li><a href='?controller=pages&action=profile'>Profile (<?php echo $_SESSION['username']; ?>)</a></li>

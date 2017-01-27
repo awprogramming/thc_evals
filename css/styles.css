@@ -19,6 +19,18 @@ main{
 	height: 50px;
 }
 
+.red {
+    background-color: red;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.green {
+    background-color: green;
+}
+
 input[type=range] {
   -webkit-appearance: none;
   width: 100%;

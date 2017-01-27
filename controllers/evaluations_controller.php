@@ -66,6 +66,7 @@
         if(!isset($_POST['evaluation_id']))
             return call('pages','error');
         else{
+            $evaluation_id = $_POST['evaluation_id'];
             $responses = Response::get_eval_responses($_POST['evaluation_id']);
             require_once('views/evaluations/evaluate.php');
         }
@@ -83,6 +84,34 @@
             return call('pages','error');
         else
             echo Evaluation::level($_POST['score']);
+    }
+
+    public function view(){
+        if(!isset($_POST['evaluation_id']))
+            return call('pages','error');
+        else{
+            $evaluation_id = $_POST['evaluation_id'];
+            $responses = Response::get_eval_responses($_POST['evaluation_id']);
+            require_once('views/evaluations/view.php');
+        }
+    }
+
+    public function submit(){
+        if(!isset($_POST['evaluation_id']))
+            return call('pages','error');
+        else{
+            Evaluation::submit($_POST['evaluation_id']);
+            return call('pages','profile');
+        }
+    }
+
+    public function approve(){
+        if(!isset($_POST['evaluation_id']))
+            return call('pages','error');
+        else{
+            Evaluation::approve($_POST['evaluation_id']);
+            return call('pages','profile');
+        }
     }
 
   }

@@ -23,24 +23,24 @@
 <?php
     $num_evals = count($counselor->evals);
     foreach($counselor->evals as $eval){
+        if($eval->submitted==0)
+            $class = 'red';
+        else if($eval->approved==0)
+            $class = 'yellow';
+        else
+            $class = 'green';
 ?>
-    <td>
-        <form action="?controller=evaluations&action=evaluate" method="post">
+    <td class="<?php echo $class?>">
+        <form action="?controller=evaluations&action=view" method="post">
             <input name="evaluation_id" value=<?php echo $eval->id ?> hidden>
-            <input type="submit" value="Continue">
+            <input type="submit" value="View">
         </form>
     </td>
 <?php 
     }
     for($i = 3-$num_evals; $i > 0; $i--){
 ?>
-    <td>
-        <form action="?controller=evaluations&action=create" method="post">
-            <input name="counselor_id" value="<?php echo $counselor->id; ?>" hidden>
-            <input name="num" value="<?php echo 4-$i ?>" hidden>
-            <input type="submit" value="Start">
-        </form>
-    </td>
+    <td class="red">Not yet started.</td>
 <?php
     }
 ?>

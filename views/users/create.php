@@ -16,6 +16,7 @@
 	    <select class="form-control" id="role" name="role" required>
 	    	<option value="admin">Admin</option>
 	    	<option value="evaluator">Evaluator</option>
+	    	<option value="approver">Approver</option>
 	    </select>
 	</div>
 
