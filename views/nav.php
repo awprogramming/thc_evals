@@ -6,7 +6,13 @@
 			<li><a href='?controller=users&action=index'>Users</a></li>
 			<li><a href='?controller=divisions&action=index'>Divisions</a></li>
 			<li><a href='?controller=counselors&action=index'>Counselors</a></li>
-			<li><a href='?controller=evaluations&action=options'>Evaluations</a></li>
+			<li class='dropdown'>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Evaluations<span class="caret"></span></a>
+          		<ul class="dropdown-menu">
+          			<li><a href='?controller=divisions&action=get_mine'>Staff Evals</a></li>
+            		<li><a href='?controller=evaluations&action=options'>Options</a></li>
+          		</ul>
+          	</li>
 <?php
 			break;
 			case 'evaluator':

@@ -128,7 +128,13 @@
     public static function get_mine(){
       $connection = Db::getInstance();
       $logged_in = $_SESSION['logged_in'];
-      if($_SESSION['role']=='evaluator'){
+      if($_SESSION['role']=='admin'){
+        $query = "SELECT c.*,d.name,d.id
+                  FROM counselor AS c
+                  INNER JOIN division AS d on d.id = c.division_id
+                  ORDER BY d.id ASC";
+      }
+      else if($_SESSION['role']=='evaluator'){
         $query = "SELECT c.*,d.name
                   FROM counselor AS c
                   INNER JOIN evaluator AS e ON c.division_id = e.division_id

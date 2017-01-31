@@ -10,11 +10,21 @@ main{
     bottom: 0;
     left: 0;
     right: 0;
-    height: 50px;
     padding:20px;
     background-color: white;
 }
 
+.eval_summary table tr td{
+    font-size: 2em;
+}
+
+.eval_summary table{
+    margin-bottom: 0;
+}
+
+.eval_summary form{
+    margin-bottom: 0;
+}
 .spacer {
 	height: 50px;
 }

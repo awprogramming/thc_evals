@@ -67,6 +67,7 @@
         if(!isset($_POST['evaluation_id']))
             return call('pages','error');
         else{
+            $options = Evaluation::options();
             $evaluation_id = $_POST['evaluation_id'];
             $responses = Response::get_eval_responses($_POST['evaluation_id']);
             require_once('views/evaluations/evaluate.php');
@@ -94,6 +95,7 @@
         if(!isset($_POST['evaluation_id']))
             return call('pages','error');
         else{
+            $options = Evaluation::options();
             $evaluation_id = $_POST['evaluation_id'];
             $responses = Response::get_eval_responses($_POST['evaluation_id']);
             require_once('views/evaluations/view.php');

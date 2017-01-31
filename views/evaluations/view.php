@@ -12,7 +12,7 @@
     <td>
       <div class="form-group">
         <p><?php echo $count . ". "?><span class="question"><?php echo $response->question; ?></span></p>
-        <input class="form-control score_slider" type="range" name="score" min="-3" value="<?php echo $response->score; ?>" max="5" step="1" disabled>
+        <input class="form-control score_slider" type="range" name="score" min="<?php echo $options['low'] ?>" value="<?php echo $response->score; ?>" max="<?php echo $options['high'] ?>" step="1" disabled>
         <textarea class="form-control feedback" name="feedback" readonly><?php echo $response->feedback ?></textarea>
       </div>
     </td>
@@ -24,15 +24,27 @@
 ?>
 </table>
 <div class="spacer"></div>
+<div class="spacer"></div>
+<div class="spacer"></div>
 <div class="eval_summary">
-    <img src="assets/ajax-loader.gif" hidden>
-    <span class="saved">Saved</span>
-    <span>Score: <span id="cur_score"></span></span>
-    <span>Level: <span id="cur_level"></span></span>
-    <form action="index.php?controller=evaluations&action=approve" method="post">
-        <input value="<?php echo $evaluation_id ?>" name="evaluation_id" hidden>
-        <input type="submit" value="Approve Evaluation">
-    </form>
+    <table class='table'>
+        <tr>
+            <td><span>Score: <span id="cur_score"></span></span></td>
+            <td><span>Level: <span id="cur_level"></span></span></td>
+            <td>
+                <form action="index.php?controller=evaluations&action=approve" method="post">
+                    <input value="<?php echo $evaluation_id ?>" name="evaluation_id" hidden>
+<?php 
+                    if($_SESSION['role']=='approver'){
+?>
+                    <input type="submit" value="Approve Evaluation">
+<?php 
+                    }
+?>
+                </form>
+            </td>
+        </tr>
+    </table>
 </div>
 <script>
 var calculate_score = function(){
@@ -42,16 +54,19 @@ var calculate_score = function(){
     }
 
     var calculate_level = function(score){
-        $.ajax('ajax_preroute.php',
-        {
-            type: 'POST',
-            data: {controller:'evaluations',
-                   action:'level',
-                   score:score},
-            cache: true,
-            success: function (data) {$('#cur_level').html(data);}, 
-            error: function () {alert("Grab Failure");}
-        });
+        var gold = parseInt(<?php echo $options['gold'] ?>);
+        var silver = parseInt(<?php echo $options['silver'] ?>);
+        var green = parseInt(<?php echo $options['green'] ?>);
+        var red = parseInt(<?php echo $options['red'] ?>);
+
+        if(score >= gold)
+            $('#cur_level').html("Gold");
+        else if(score >= silver)
+            $('#cur_level').html("Silver");
+        else if(score >= green)
+            $('#cur_level').html("Green");
+        else
+            $('#cur_level').html("Red");
     }
 
     var cur_score = calculate_score();
