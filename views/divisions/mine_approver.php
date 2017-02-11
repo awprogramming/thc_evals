@@ -33,7 +33,7 @@
     <td class="<?php echo $class?>">
         <form action="?controller=evaluations&action=view" method="post">
             <input name="evaluation_id" value=<?php echo $eval->id ?> hidden>
-            <input type="submit" value="View">
+            <input type="submit" value="View" class="btn">
         </form>
         <span><?php echo $eval->level . ": " . $eval->score ?></span>
     </td>

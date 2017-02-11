@@ -5,6 +5,7 @@
 ?>
 			<li><a href='?controller=users&action=index'>Users</a></li>
 			<li><a href='?controller=divisions&action=index'>Divisions</a></li>
+			<li><a href='?controller=specialties&action=index'>Specialties</a></li>
 			<li><a href='?controller=counselors&action=index'>Counselors</a></li>
 			<li class='dropdown'>
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Evaluations<span class="caret"></span></a>

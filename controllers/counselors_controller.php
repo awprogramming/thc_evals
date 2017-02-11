@@ -52,6 +52,19 @@
         }
     }
 
+    public function add_specialty(){
+        if(!isset($_POST['specialty_id'])){
+            $id = $_POST['id'];
+            $name = $_POST['name'];
+            $specialties = Counselor::get_specialties();
+            require_once('views/counselors/add_specialty.php');
+        }
+        else{
+            Counselor::add_specialty($_POST['id'],$_POST['specialty_id']);
+            return call('counselors','index');
+        }
+    }
+
     public function change_division(){
         if(!isset($_POST['changed'])){
             $id = $_POST['id'];
@@ -63,6 +76,20 @@
         }
         else{
             Counselor::add_division($_POST['id'],$_POST['division_id']);
+            return call('counselors','index');
+        }
+    }
+
+    public function change_specialty(){
+        if(!isset($_POST['changed'])){
+            $id = $_POST['id'];
+            $name = $_POST['name'];
+            $specialty_id = $_POST['specialty_id'];
+            $specialties = Counselor::get_specialties();
+            require_once('views/counselors/change_specialty.php');
+        }
+        else{
+            Counselor::add_specialty($_POST['id'],$_POST['specialty_id']);
             return call('counselors','index');
         }
     }

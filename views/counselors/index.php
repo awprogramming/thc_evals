@@ -7,6 +7,7 @@
 		<th>First</th>
 		<th>Last</th>
         <th>Type</th>
+        <th>Specialty</th>
         <th>Division</th>
         <th></th>
 	</tr>
@@ -18,6 +19,39 @@
     <td><?php echo $counselor->first; ?></td>
     <td><?php echo $counselor->last; ?></td>
     <td><?php echo $counselor->type; ?></td>
+<?php
+    if($counselor->type=="Specialist"){
+       if(is_null($counselor->specialty)){
+?>
+        <td>
+            <form action="?controller=counselors&action=add_specialty" method="post">
+                <input name="name" value=<?php echo urlencode($counselor->first . " " . $counselor->last) ?> hidden>
+                <input name="id" value=<?php echo $counselor->id ?> hidden>
+                <input type="submit" value="+">
+            </form>
+        </td>
+<?php
+        }
+        else{
+?>
+        <td>
+            <form action="?controller=counselors&action=change_specialty" method="post">
+                <span><?php echo $counselor->specialty[1]; ?></span>
+                <input name="id" value=<?php echo $counselor->id; ?> hidden>
+                <input name="specialty_id" value=<?php echo $counselor->specialty[0]; ?> hidden>
+                <input name="name" value=<?php echo urlencode($counselor->first . " " . $counselor->last) ?> hidden>
+                <input type="submit" value="Change Specialty">
+            </form>
+        </td>
+<?php
+        }
+    }
+    else{
+?>
+    <td>N/A</td>
+<?php
+    }
+?> 
 <?php
        if(is_null($counselor->division)){
 ?>

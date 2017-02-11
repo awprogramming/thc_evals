@@ -5,6 +5,7 @@
     public $gender;
     public $evaluators;
     public $counselors;
+    public $approvers;
 
     public function __construct($id, $name, $gender, $evaluators, $approvers, $counselors) {
       $this->id = $id;

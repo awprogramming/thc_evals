@@ -33,7 +33,7 @@
     <td class="<?php echo $class?>">
         <form action="?controller=evaluations&action=evaluate" method="post">
             <input name="evaluation_id" value=<?php echo $eval->id ?> hidden>
-            <input type="submit" value="Continue">
+            <input type="submit" value="Continue" class="btn">
         </form>
         <span><?php echo $eval->level . ": " . $eval->score ?></span>
     </td>
@@ -45,7 +45,7 @@
         <form action="?controller=evaluations&action=create" method="post">
             <input name="counselor_id" value="<?php echo $counselor->id; ?>" hidden>
             <input name="num" value="<?php echo 4-$i ?>" hidden>
-            <input type="submit" value="Start">
+            <input type="submit" value="Start" class="btn">
         </form>
     </td>
 <?php
