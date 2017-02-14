@@ -34,20 +34,13 @@
     }
     $num_evals = count($counselor->evals);
     foreach($counselor->evals as $eval){
-        if($eval->submitted==0)
-            $class = 'red';
-        else if($eval->approved==0)
-            $class = 'yellow';
-        else
-            $class = 'green';
 ?>
-    <td class="<?php echo $class?>">
-        <form action="?controller=evaluations&action=evaluate" method="post">
+    <td>
+        <form action="?controller=evaluations&action=specialist" method="post">
             <input name="evaluation_id" value=<?php echo $eval->id ?> hidden>
             <input name="type" value="<?php echo $eval->type ?>" hidden>
             <input type="submit" value="Continue" class="btn">
         </form>
-        <span><?php echo $eval->level . ": " . $eval->score . "%" ?></span>
     </td>
 <?php 
     }

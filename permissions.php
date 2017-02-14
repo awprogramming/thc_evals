@@ -19,7 +19,12 @@ function hasPermission($controller,$action){
 									  'users' => ['update_password'],
 									  'counselors' => ['index','create','remove','update','add_division','change_division'],
 									  'divisions' => ['get_mine'],
-									  'evaluations' => ['level','view','unapproved','approve','view'])
+									  'evaluations' => ['level','view','unapproved','approve','view']),
+                     'office'	=>	array('pages' => ['home','login','login_error','profile','permission_error','error'],
+									  'auth' => ['login','logout'],
+									  'users' => ['update_password'],
+									  'divisions' => ['get_mine'],
+									  'evaluations' => ['create','evaluate','save_response','level','view','specialist'])
                       );
 	$question = $permissions[$_SESSION['role']];
 	if(array_key_exists($controller, $question)){

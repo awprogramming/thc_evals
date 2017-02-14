@@ -17,6 +17,7 @@
 	    	<option value="admin">Admin</option>
 	    	<option value="evaluator">Evaluator</option>
 	    	<option value="approver">Approver</option>
+	    	<option value="office">Office</option>
 	    </select>
 	</div>
 

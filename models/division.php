@@ -143,6 +143,11 @@
                   INNER JOIN division AS d on d.id = c.division_id
                   WHERE u.id ='$logged_in'";
       }
+      else if($_SESSION['role']=='office'){
+        $query = "SELECT c.*,s.description
+                  FROM counselor AS c
+                  INNER JOIN specialty AS s ON s.id = c.specialty_id";
+      }
       else{
         $query = "SELECT c.*,d.name
                   FROM counselor AS c
@@ -156,7 +161,7 @@
       $next_row = $result->fetch_row();
       while($next_row)
       {
-        $list[$next_row[6]][] = new Counselor($next_row[0],$next_row[1],$next_row[2],$next_row[3],$next_row[4],$next_row[5]);
+        $list[$next_row[7]][] = new Counselor($next_row[0],$next_row[1],$next_row[2],$next_row[3],$next_row[4],$next_row[5],$next_row[6]);
         $next_row = $result->fetch_row();
       }
       return $list;

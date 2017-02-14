@@ -4,12 +4,13 @@
     public $id;
     public $num;
     public $summer;
+    public $type;
     public $submitted;
     public $approved;
     public $score;
     public $level;
 
-    public function __construct($id, $num, $summer, $submitted, $approved) {
+    public function __construct($id, $num, $summer, $submitted, $approved, $type) {
       $this->id = $id;
       $this->num = $num;
       $this->summer = $summer;
@@ -18,11 +19,12 @@
       $score = Evaluation::score($id);
       $this->score = $score;
       $this->level = Evaluation::level($score);
+      $this->type = $type;
     }
 
-    public static function create($counselor_id, $num) {
+    public static function create($counselor_id, $num, $type) {
       $connection = Db::getInstance();
-      $query = "INSERT INTO `evaluation` (`num`, `summer`) VALUES ('$num',YEAR(CURDATE()))";
+      $query = "INSERT INTO `evaluation` (`num`, `summer`,`type`) VALUES ('$num',YEAR(CURDATE()),'$type')";
       $connection->query($query);
       $evaluation_id = $connection->insert_id;
       $query = "INSERT INTO `counselor_evaluation` (`counselor_id`,`evaluation_id`) VALUES ('$counselor_id','$evaluation_id')";
@@ -42,7 +44,7 @@
       $next_row = $result->fetch_row();
       while($next_row)
       {
-        $list[] = new Evaluation($next_row[0],$next_row[1],$next_row[2],$next_row[3],$next_row[4]);
+        $list[] = new Evaluation($next_row[0],$next_row[1],$next_row[2],$next_row[3],$next_row[4],$next_row[5]);
         $next_row = $result->fetch_row();
       }
       return $list;
@@ -56,10 +58,10 @@
 
     public static function score($evaluation_id){
        $connection = Db::getInstance();
-       $query = "SELECT SUM(score) FROM response where evaluation_id='$evaluation_id'";
+       $query = "SELECT SUM(score),COUNT(score) FROM response where evaluation_id='$evaluation_id'";
        $result = $connection->query($query);
        $first_row = $result->fetch_row();
-       return $first_row[0];
+       return round(($first_row[0]/($first_row[1]*5))*100);
     }
 
     public static function level($score){

@@ -71,6 +71,8 @@
         $divisions = Division::get_mine();
         if($_SESSION['role']=='evaluator')
             require_once('views/divisions/mine_evaluator.php');
+        else if($_SESSION['role']=='office')
+            require_once('views/divisions/mine_office.php');
         else
             require_once('views/divisions/mine_approver.php');
     }

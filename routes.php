@@ -69,7 +69,7 @@
                        'users' => ['index','create','remove','update_password'],
                        'divisions' => ['index','add_evaluator','remove_evaluator','get_mine','add_approver','remove_approver'],
                        'counselors' => ['index','create','remove','update','add_division','change_division','add_specialty','change_specialty'],
-                       'evaluations' => ['index','questions','create_question','remove_question','update_question','create','evaluate','save_response','options','update_options','level','view','submit','approve'],
+                       'evaluations' => ['index','questions','create_question','remove_question','update_question','create','evaluate','save_response','options','update_options','level','view','submit','approve','specialist'],
                        'specialties' => ['index','create','remove','update']
                       );
   // check that the requested controller and action are both allowed

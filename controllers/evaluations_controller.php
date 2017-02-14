@@ -21,14 +21,25 @@
 
     public function questions() {
         $questions = Question::all();
+        $general = array();
+        $specialist = array();
+        $gl = array();
+        foreach ($questions as $question) {
+            if($question->type=="GC")
+                $general[] = $question;
+            else if($question->type=="S")
+                $specialist[] = $question;
+            else
+                $gl[] = $question;
+        }
         require_once('views/evaluations/questions.php');
     }
 
     public function create_question(){
-        if(!isset($_POST['content']))
+        if(!isset($_POST['content'])||!isset($_POST['type']))
             require_once('views/evaluations/create_question.php');
         else
-            Question::create($_POST['content']);
+            Question::create($_POST['content'],$_POST['type']);
         return call('evaluations','questions');
     }
 
@@ -42,23 +53,26 @@
     }
 
     public function update_question() {
+        $types = ['GC','S','GL'];
         if(!isset($_POST['updated'])){
             $id = $_POST['id'];
+            $type = $_POST['type'];
             $content = $_POST['content'];
             require_once('views/evaluations/update_question.php');
         }
         else{
-            Question::update($_POST['id'],$_POST['content']);
+            Question::update($_POST['id'],$_POST['content'],$_POST['type']);
             return call('evaluations','questions');
         }
     }
 
     public function create(){
-        if(!isset($_POST['counselor_id'])||!isset($_POST['num']))
+        if(!isset($_POST['counselor_id'])||!isset($_POST['num'])||!isset($_POST['type']))
             return call('pages','error');
         else{
-            $evaluation_id = Evaluation::create($_POST['counselor_id'],$_POST['num']);
-            $responses = Response::create_eval_responses($evaluation_id);
+            $options = Evaluation::options();
+            $evaluation_id = Evaluation::create($_POST['counselor_id'],$_POST['num'],$_POST['type']);
+            $responses = Response::create_eval_responses($evaluation_id,$_POST['type']);
             require_once('views/evaluations/evaluate.php');
         }
     }
@@ -69,8 +83,21 @@
         else{
             $options = Evaluation::options();
             $evaluation_id = $_POST['evaluation_id'];
+            $type = $_POST['type'];
             $responses = Response::get_eval_responses($_POST['evaluation_id']);
             require_once('views/evaluations/evaluate.php');
+        }
+    }
+
+    public function specialist(){
+        if(!isset($_POST['evaluation_id']))
+            return call('pages','error');
+        else{
+            $options = Evaluation::options();
+            $evaluation_id = $_POST['evaluation_id'];
+            $type = $_POST['type'];
+            $responses = Response::get_specialist_responses($_POST['evaluation_id']);
+            require_once('views/evaluations/specialist.php');
         }
     }
 
@@ -97,6 +124,7 @@
         else{
             $options = Evaluation::options();
             $evaluation_id = $_POST['evaluation_id'];
+            $type = $_POST['evaluation_type'];
             $responses = Response::get_eval_responses($_POST['evaluation_id']);
             require_once('views/evaluations/view.php');
         }
